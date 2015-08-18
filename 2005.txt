@@ -1,0 +1,41 @@
+From kley at Landkreis-Northeim.de  Tue Feb 15 14:02:32 2005
+From: kley at Landkreis-Northeim.de (=?iso-8859-1?Q?Kley_G=FCnter?=)
+Date: Tue, 15 Feb 2005 14:02:32 +0100
+Subject: [Ebkus-support] Ebkus 3.2
+Message-ID: <D3C436B2194FFC43AB30A777939CBA47D82DED@prometheus.lk.nom.de>
+
+Sehr geehrte Damen, sehr geehrte Herren,
+
+ 
+
+trotz einiger Anlaufschwierigkeiten ist mir nun doch die Installation von EBKus 3.2 gelungen.
+
+ 
+
+Was mir allerdings nicht gelingen will, ist die Verbindung zum Verfahren von einem anderen Rechner aus ?ber den MS Internetexplorer.
+
+Ich verwende die in der Anlage beigef?gte EBKuS.conf.
+
+Der Server auf dem Apache l?uft hat die IP 10.64.8.126
+
+Bisher ist eine Anmeldung nur lokal am Server m?glich.
+
+Als Betriebssystem auf dem Server ist WIN2000 Advanced Server installiert.
+
+Haben Sie noch eine L?sungsm?glichkeit f?r mich?
+
+Mit freundlichen Gr??en
+
+Kley
+
+-------------- next part --------------
+An HTML attachment was scrubbed...
+URL: <https://lists.berlios.de/pipermail/ebkus-support/attachments/20050215/3572bebe/attachment.html>
+-------------- next part --------------
+A non-text attachment was scrubbed...
+Name: ebkus.conf
+Type: application/octet-stream
+Size: 4032 bytes
+Desc: ebkus.conf
+URL: <https://lists.berlios.de/pipermail/ebkus-support/attachments/20050215/3572bebe/attachment.obj>
+

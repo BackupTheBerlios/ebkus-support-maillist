@@ -1,0 +1,224 @@
+From atms at alibi.in-berlin.de  Sun Aug 15 15:35:58 2004
+From: atms at alibi.in-berlin.de (Albrecht Schmiedel)
+Date: Sun, 15 Aug 2004 15:35:58 +0200
+Subject: [Ebkus-support] Re: [Fwd: EBKuS 3.2 preview]
+In-Reply-To: <411D0780.20404@gmx.net>
+References: <4118A24B.5070708@xhonneux.com> <411D0780.20404@gmx.net>
+Message-ID: <411F66BE.5060104@alibi.in-berlin.de>
+
+Hallo Herr Saffre,
+
+Ich freue mich ?ber Ihr Interesse!
+ 
+> Ich bin in der INSTALL.txt, "Installation unter Linux", an Punkt 5 
+> angelangt. Punkt 4 (ebkus.conf anpassen) habe ich wahrscheinlich noch 
+> nicht fertig, aber das werden wir sp?ter sehen.
+
+Zur Konfiguration muss ich noch was schreiben ...
+Aber Sie sollten auch ohne das erst mal eine default-Installation
+hinkriegen.
+
+> Aber bei Punkt 5 kriege ich folgeden Traceback:
+> 
+> luc at asterix:/mnt/snapshots/ebkus-2$ python install.py /home/ebkus
+> Installationsverzeichnis: /home/ebkus
+> Downloadverzeichnis: /home/ebkus
+> Konfigurationsdatei: /home/ebkus/ebkus/ebkus.conf
+
+Die Konfigurationsdatei existiert also. Gut.
+
+> Traceback (most recent call last):
+>   File "install.py", line 149, in ?
+>     installer.init()
+>   File "/mnt/snapshots/ebkus-2/lib/ebkus/Install.py", line 303, in init
+>     self.config = self.init_config()
+>   File "/mnt/snapshots/ebkus-2/lib/ebkus/Install.py", line 147, in 
+> init_config
+>     ebkus.config.init(instance, conf_files)
+>   File "/mnt/snapshots/ebkus-2/lib/ebkus/config.py", line 74, in init
+>     config = _Config(instance_name, config_files, defaults)
+>   File "/mnt/snapshots/ebkus-2/lib/ebkus/config.py", line 91, in __init__
+>     self._init_PARAMS()
+>   File "/mnt/snapshots/ebkus-2/lib/ebkus/config.py", line 205, in 
+> _init_PARAMS
+>     for s, P, p, v, t in self._param_iterator(_params):
+>   File "/mnt/snapshots/ebkus-2/lib/ebkus/config.py", line 191, in 
+> _param_iterato
+> r
+>     value = f(section, param)
+>   File "/usr/lib/python2.3/ConfigParser.py", line 505, in get
+>     raise NoSectionError(section)
+> ConfigParser.NoSectionError: No section: 'ebkus'
+
+Aber sie hat keinen Abschnitt '[ebkus]'.
+Ich bekomme dasselbe Ergebnis, wenn ich in ebkus.conf den Abschnitt
+[ebkus] auskommentiere. Die Abschnitte [DEFAULT], [ebkus], [apache],
+und [openssl] m?ssen aber immer vorhanden sein. Die weiteren Abschnitte
+sind die zu konfigurierenden EBKuS-Instanzen (default-m??ig [demo] und
+[efb_kreuzberg]).
+
+Probieren Sie doch einmal eine direkt default-Installation, ohne
+Editieren der ebkus.conf:
+--------- 
+1. neues Installationsverzeichnis anlegen:
+
+mkdir /home/ebkus/ebinst
+
+2. default-Installation erzeugen:
+
+cd /mnt/snapshots/ebkus-2
+python install.py /home/ebkus/ebinst
+---------
+
+Wenn ich das mache (mit etwas anderen Verzeichnisnamen)
+bekomme ich folgendes Traceback:
+
+----------
+ebkus at alibi:~/tmp/ebkus-2> mkdir ~/tmp/ebinst
+ebkus at alibi:~/tmp/ebkus-2> python install.py ~/tmp/ebinst
+Installationsverzeichnis: /home/ebkus/tmp/ebinst
+Downloadverzeichnis: /home/ebkus/tmp/ebinst
+keine Konfigurationsdatei gefunden
+Konfigurationsdatei mit default-Werten erzeugt: /home/ebkus/tmp/ebinst/ebkus/ebkus.conf
+mysql ist betriebsbereit
+ebkus installieren
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus
+    kopieren: /home/ebkus/tmp/ebkus-2/README.txt --> /home/ebkus/tmp/ebinst/ebkus
+    ebkus erfolgreich installiert
+ebkus konfigurieren
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/log
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/openssl.cnf
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/ebkus_httpd.conf
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/configure.py
+    SSL Zertifikate erzeugen
+        erfolgreich erzeugt
+    ebkus erfolgreich konfiguriert
+reportlab installieren
+    herunterladen: http://www.reportlab.org/ftp/ReportLab_1_19.zip  ...
+        erfolgreich heruntergeladen
+    entpacke: /home/ebkus/tmp/ebinst/ReportLab_1_19.zip
+    kopieren:  /home/ebkus/tmp/ebinst/reportlab-1_19/reportlab  -->  /home/ebkus/tmp/ebinst/ebkus/lib
+    reportlab erfolgreich installiert
+pygdchart installieren
+    herunterladen: http://www.alibi.in-berlin.de/download/pygdchart0.6.1-linux-py23.zip  ...
+        erfolgreich heruntergeladen
+    entpacke: /home/ebkus/tmp/ebinst/pygdchart0.6.1-linux-py23.zip
+    kopieren:  /home/ebkus/tmp/ebinst/pygdchart0.6.1-linux-py23.zipTMP/gdchart.so  -->  /home/ebkus/tmp/ebinst/ebkus/lib
+    pygdchart erfolgreich installiert
+demo konfigurieren
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/daten
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/daten/export
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/daten/akten
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/daten/gruppen
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/htdocs/daten/export
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/htdocs/cgi
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/protokolle
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/init.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/start.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/stop.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/datenbank_initialisieren.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/dienst.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/htdocs/index.html
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/demo/htdocs/cgi/do
+    ebkus_httpd.conf erfolgreich fuer demo angepasst
+    Datenbank betriebsbereit: name=demo
+    demo erfolgreich konfiguriert
+efb_kreuzberg konfigurieren
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/daten
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/daten/export
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/daten/akten
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/daten/gruppen
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/htdocs/daten/export
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/htdocs/cgi
+    Verzeichnis erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/protokolle
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/init.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/start.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/stop.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/datenbank_initialisieren.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/dienst.py
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/htdocs/index.html
+    Datei erzeugen: /home/ebkus/tmp/ebinst/ebkus/efb_kreuzberg/htdocs/cgi/do
+    ebkus_httpd.conf erfolgreich fuer efb_kreuzberg angepasst
+    Datenbank betriebsbereit: name=efb_kreuzberg
+    efb_kreuzberg erfolgreich konfiguriert
+ebkus at alibi:~/tmp/ebkus-2>
+-----------
+
+Voraussetzungen, dass das so durchl?uft mit der default-Konfiguration:
+- in python sollte folgendes Funktionieren:
+  >>> import MySQLdb
+  >>> db = MySQLdb.connect(host='localhost', user='root', db='mysql')
+- mysql und mysqldump stehen im Pfad
+- 'mysql -u root' funktioniert (kein Admin-Passwort)
+- openssl steht im Pfad
+- Internetverbindung funktioniert, so dass
+  - http://www.reportlab.org/ftp/ReportLab_1_19.zip und
+  - http://www.alibi.in-berlin.de/download/pygdchart0.6.1-linux-py23.zip
+  heruntergeladen werden kann.
+
+Wenn Sie dann noch die generierte Datei ebkus_httpd.conf in die httpd.conf
+des Apache einbinden, sollten die beiden default-Server eigentlich
+funktionieren (demo, efb_kreuzberg). Wenn das geht, k?nnen Sie 
+ebkus.conf modifizieren und die Prozedur wiederholen.
+
+> Momentan habe ich den Verdacht, dass "Downloadverzeichnis: /home/ebkus" 
+> die Ursache anzeigt. Das Downloadverzeichnis m?sste doch 
+> "/mnt/snapshots/ebkus-2" sein...
+
+Nein, Installationsverzeichnis == Downloadverzeichnis falls nichts anderes
+angegeben.
+
+Beim installieren wird immer zuerst gepr?ft, ob die ben?tigte Software
+in einem ?bergeordneten linux- bzw win32-Verzeichnis steht, so wie das bei
+Installation von der CD der Fall w?re.
+
+Wenn nicht, wird im Downloadverzeichnis nachgesehen. Das Downloadverzeichnis
+ist das Installationsverzeichnis, falls nicht explit ein anderes angegeben
+wird (install.py -d <path> ...). Falls nicht vorhanden, wird ins 
+Downloadverzeichnis heruntergeladen.
+ 
+> N.B.: Ich installiere nicht vom Distributionsverzeichnis (CD schreiben 
+> hat nicht geklappt), sondern direkt vom CVS-Verzeichnis aus.
+
+Warum hat das eigentlich nicht geklappt? Sollte eigentlich. Bei mir gibt es 
+manchmal Internet-Problem, kein Nameserver, o.?.
+
+Vielleicht hilft das ja weiter. 
+
+mit freundlichen Gr??en,
+-Albrecht Schmiedel
+
+
+From atms at alibi.in-berlin.de  Mon Aug 23 15:45:49 2004
+From: atms at alibi.in-berlin.de (Albrecht Schmiedel)
+Date: Mon, 23 Aug 2004 15:45:49 +0200
+Subject: [Ebkus-support] Re: EBKuS: Hochladen von OpenOffice-Dokument
+In-Reply-To: <4129E5EF.4010504@xhonneux.com>
+References: <4129E5EF.4010504@xhonneux.com>
+Message-ID: <4129F50D.9070307@alibi.in-berlin.de>
+
+Gerd Xhonneux schrieb:
+> Rehi Luc,
+> 
+> beim Hochladen eines OpenOffice-Dokuments bekomme ich folgende 
+> Fehlermitteilung:
+> 
+> "Kein passendes Dateiformat (Mime Typ). Code 'sxw' f?r Kategorie 
+> 'mimetyp' existiert nicht"
+> 
+> Das SPZ arbeitet prim?r mit OOo. Hast du daf?r eventuell eine L?sung?
+
+- als Admin anmelden
+- Admin - Hauptmen? - Kategorien - Alle - Kategorie Mimetyp
+- einen neuen Eintrag machen mit 
+  code = sxw,  merkmal = application/soffice, sort = 13
+
+Dann sollte es gehen.
+Ich werde das gleich in die Quellen eintragen, so dass es vorkonfiguriert ist.
+
+Gru?,
+-Albrecht Schmiedel
+
+
